@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.souzaemerson.aluramvvm.R
 import com.souzaemerson.aluramvvm.data.database.AppDatabase
 import com.souzaemerson.aluramvvm.data.database.repository.DatabaseRepositoryImpl
@@ -13,6 +15,8 @@ import com.souzaemerson.aluramvvm.data.model.Book
 import com.souzaemerson.aluramvvm.databinding.FragmentFormBinding
 import com.souzaemerson.aluramvvm.ui.activity.fragment.form.viewmodel.FormViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 class FormFragment() : Fragment() {
@@ -50,7 +54,12 @@ class FormFragment() : Fragment() {
                     title = title,
                     description = description,
                     image = image)
-                viewModel.insertBook(book)
+                lifecycleScope.launch{
+                    withContext(Dispatchers.IO){
+                        viewModel.insertBook(book)
+                    }
+                }
+                findNavController().navigate(R.id.action_formFragment_to_homeFragment)
             }
         }
 

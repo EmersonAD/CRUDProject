@@ -9,11 +9,11 @@ import com.souzaemerson.aluramvvm.data.model.Book
 interface DatabaseDAO {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertBook(book: Book)
+    fun insertBook(book: Book)
 
     @Query("SELECT * FROM book_table")
     fun getAllBooks(): LiveData<List<Book>>
 
     @Delete
-    suspend fun deleteBook(book: Book)
+    fun deleteBook(book: Book)
 }

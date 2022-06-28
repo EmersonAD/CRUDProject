@@ -1,5 +1,7 @@
 package com.souzaemerson.aluramvvm.core
 
+import com.souzaemerson.aluramvvm.data.model.Book
+
 data class State<out T>(
     val status: Status,
     val loading: Boolean?,
@@ -7,11 +9,11 @@ data class State<out T>(
     val error: Throwable?
 ) {
     companion object{
-        fun <T> success(data: T?): State<T>{
-            return State(Status.SUCCESS, loading = false, data, error = null)
+        fun <T> success(data: T?): State<T> {
+            return State(Status.SUCCESS, false, data, null)
         }
        fun <T> error(error: Throwable?): State<T>{
-           return State(Status.ERROR, loading = false, null, error)
+           return State(Status.ERROR, false, null, error)
        }
         fun <T> loading(loading: Boolean?): State<T>{
             return State(Status.LOADING, loading, null,null)

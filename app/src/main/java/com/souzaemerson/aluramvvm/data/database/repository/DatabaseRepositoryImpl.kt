@@ -5,7 +5,7 @@ import com.souzaemerson.aluramvvm.data.database.DatabaseDAO
 import com.souzaemerson.aluramvvm.data.model.Book
 
 class DatabaseRepositoryImpl(private val dao: DatabaseDAO): IDatabaseRepository {
-    override suspend fun insertBook(book: Book){
+    override fun insertBook(book: Book){
         dao.insertBook(book)
     }
 
@@ -13,7 +13,7 @@ class DatabaseRepositoryImpl(private val dao: DatabaseDAO): IDatabaseRepository 
        return dao.getAllBooks()
     }
 
-    override suspend fun removeBook(book: Book){
+    override fun removeBook(book: Book){
         dao.deleteBook(book)
     }
 }
